@@ -68,6 +68,7 @@ function removeItem(e) {
       });
     }
   }
+  localStorage.removeItem('userDetails');
 }
 
 
