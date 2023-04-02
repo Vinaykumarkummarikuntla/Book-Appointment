@@ -1,5 +1,5 @@
 var form = document.getElementById("addForm");
-var UserList = document.getElementById("details");
+var UserList = document.getElementById("userDetails");
 
 form.addEventListener("submit", addItem);
 
@@ -12,6 +12,7 @@ function addItem(e) {
   var gmail = document.getElementById("gmail").value;
 
   var phoneNumber = document.getElementById("phone").value;
+  
 
   const details = {
     userName: userName,
@@ -22,18 +23,24 @@ function addItem(e) {
   localStorage.setItem("userDetails", UserDetails);
 
   var li = document.createElement("li");
-  li.className = "list-group-item";
+  // li.className = "list-group-item";
   li.appendChild(document.createTextNode(userName));
 
   var li_2 = document.createElement("li");
-  li_2.className = "list-group-item";
+  // li_2.className = "list-group-item";
   li_2.appendChild(document.createTextNode(gmail));
 
   var li_3 = document.createElement("li");
-  li_3.className = "list-group-item";
+  // li_3.className = "list-group-item";
   li_3.appendChild(document.createTextNode(phoneNumber));
+
+  var button = document.createElement("button");
+  button.className = "btn btn-primary";
+  button.textContent = "Edit";
+  
 
   UserList.appendChild(li);
   UserList.appendChild(li_2);
   UserList.appendChild(li_3);
+  UserList.appendChild(button)
 }
