@@ -1,12 +1,13 @@
 var form = document.getElementById("addForm");
 var UserList = document.getElementById("userDetails");
 
-var userDetails = []; // initialize empty array to store user details
+var userDetails = [];
 
 form.addEventListener("submit", addItem);
 UserList.addEventListener("click", removeItem);
+UserList.addEventListener("click", editItem);
 
-// addItem function - adding userDetails front page
+// Add UserDetails
 function addItem(e) {
   e.preventDefault();
 
@@ -19,7 +20,7 @@ function addItem(e) {
     gmail: gmail,
     phoneNumber: phoneNumber,
   };
-  
+
   userDetails = JSON.stringify(details);
   localStorage.setItem(userName, userDetails);
   var li = document.createElement("li");
@@ -49,6 +50,7 @@ function addItem(e) {
   UserList.appendChild(li_3);
 }
 
+// Delete UserDetails
 function removeItem(e) {
   if (e.target.classList.contains("delete")) {
     if (confirm("Are You Sure?")) {
@@ -67,5 +69,32 @@ function removeItem(e) {
       localStorage.removeItem(key);
       console.log("deleted");
     }
+  }
+}
+
+//Edit UserDetails
+function editItem(e) {
+  if (e.target.classList.contains("Edit")) {
+    var li = e.target.parentElement;
+
+    var userName = li.getAttribute("data-username"); // get unique identifier
+
+    // Remove the UI elements for the user
+    var liArray = document.querySelectorAll(`li[data-username="${userName}"]`);
+    liArray.forEach((item) => {
+      UserList.removeChild(item);
+    });
+
+    // Get the user details from local storage
+    var userDetailsJSON = localStorage.getItem(userName);
+    var userDetails = JSON.parse(userDetailsJSON);
+
+    // Remove the user details from local storage
+    localStorage.removeItem(userName);
+
+    // Populate the form fields with the user details
+    document.getElementById("username").value = userDetails.userName;
+    document.getElementById("gmail").value = userDetails.gmail;
+    document.getElementById("phone").value = userDetails.phoneNumber;
   }
 }
