@@ -33,7 +33,7 @@ function addItem(e) {
     )
   
 
-  // local storage
+  // local storage details
   // userDetails = JSON.stringify(details);
   // localStorage.setItem(userName, userDetails);
 
