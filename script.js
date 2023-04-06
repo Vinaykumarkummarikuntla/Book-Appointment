@@ -21,8 +21,23 @@ function addItem(e) {
     phoneNumber: phoneNumber,
   };
 
-  userDetails = JSON.stringify(details);
-  localStorage.setItem(userName, userDetails);
+// user details are stored in the server
+  axios
+  .post("https://crudcrud.com/api/272a01edd40048778c0ddb27ec67fa5a/userdetails",{details})
+  .then((response)=>{
+    console.log(response)
+  })
+  .catch((error)=>{
+    console.log(error)
+  }
+    )
+  
+
+  // local storage
+  // userDetails = JSON.stringify(details);
+  // localStorage.setItem(userName, userDetails);
+
+  // create list tags for showing output details
   var li = document.createElement("li");
   li.setAttribute("data-username", userName); // add unique identifier
   li.appendChild(document.createTextNode(userName));
@@ -35,10 +50,12 @@ function addItem(e) {
   li_3.setAttribute("data-username", userName); // add unique identifier
   li_3.appendChild(document.createTextNode(phoneNumber));
 
+  // delete button
   var deleteButton = document.createElement("button");
   deleteButton.className = "btn btn-danger btn-sm float-right delete";
   deleteButton.appendChild(document.createTextNode("Delete"));
 
+  // edit button
   var editButton = document.createElement("button");
   editButton.className = "btn btn-secondary btn-sm float-right Edit";
   editButton.appendChild(document.createTextNode("Edit"));
